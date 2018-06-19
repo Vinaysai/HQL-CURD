@@ -8,7 +8,7 @@
             <column name="ID" />
             <generator class="assigned" />
         </id>
-        <property name="fname" type="java.lang.String">
+        <property   update="true" name="fname" type="java.lang.String">
             <column name="FNAME" />
         </property>
         <property name="lname" type="java.lang.String">

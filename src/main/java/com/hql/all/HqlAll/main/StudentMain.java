@@ -21,58 +21,39 @@ public class StudentMain {
 		return sf;
 	}
 
-	public static void select() {
-		// Using label...............
-		Session s1 = getsession().openSession();
-
-		Query qry = s1.createQuery("from StudentHQL p where p.id= :java4s");
-		qry.setParameter("java4s", 105);
-
-		List l = qry.list();
-		System.out.println("Total Number Of Records : " + l.size());
-		Iterator it = l.iterator();
-
-		while (it.hasNext()) {
-			Object o = (Object) it.next();
-			StudentHQL p = (StudentHQL) o;
-			System.out.println("---------------------------");
-
-			System.out.println("Student Name : " + p.getFname());
-			System.out.println("Last Price : " + p.getLname());
-			System.out.println("---------------------------");
-		}
-	}
-
-	public static void selectmore() {
-
-		/* Using Question Mark */
+	public void Update() {
 		s1 = getsession().openSession();
 
-		Query qry1 = s1.createQuery("from StudentHQL p where p.id= ?1");
-		qry1.setParameter(1, 1);
+		Query qry = s1.createQuery("update StudentHQL p set p.fname=?1 where p.id=1");
+		qry.setParameter(1, "MY NAME IS VINAYSAI...");
+		int res = qry.executeUpdate();
 
-		List l1 = qry1.list();
-		System.out.println("Total Number Of Records : " + l1.size());
-		Iterator it1 = l1.iterator();
-
-		while (it1.hasNext()) {
-			Object o = (Object) it1.next();
-			StudentHQL p = (StudentHQL) o;
-			System.out.println("Student Name : " + p.getFname());
-			System.out.println("Student last : " + p.getLname());
-			System.out.println("---------------------------");
-
-		}
+		System.out.println("Command successfully executed....");
+		System.out.println("Numer of records effected due to update query" + res);
 
 		s1.close();
 	}
 
-	public static void main(String[] args) {
+	public void Delete() {
 
-		select();
-		System.out.println("Select:::");
-		selectmore();
-		System.out.println("Select:::More::");
+		s1 = getsession().openSession();
+
+		Query qry = s1.createQuery("delete from StudentHQL p where p.id=1");
+	//	qry.setParameter("1", 3);
+		int res = qry.executeUpdate();
+
+		System.out.println("Command successfully executed....");
+		System.out.println("Numer of records effected due to delete query" + res);
+		s1.close();
+	}
+
+	public static void main(String[] args) {
+//
+		StudentMain sm = new  StudentMain();
+//		sm.Update();
+		System.out.println("Update:::");
+		sm.Delete();
+		 System.out.println("Select:::More::");
 
 	}
 
